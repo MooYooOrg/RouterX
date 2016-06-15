@@ -17,7 +17,7 @@ public struct RoutingPatternScanner {
     }
 
     private var unScannedFragment: String {
-        return self.expression.substringFromIndex(self.position)
+        return expression.substring(from: position)
     }
 
     public mutating func nextToken() -> RoutingPatternToken? {
@@ -27,7 +27,7 @@ public struct RoutingPatternScanner {
 
         let firstChar = self.unScannedFragment.characters.first!
 
-        self.position = self.position.advancedBy(1)
+        self.position = self.unScannedFragment.index(after: self.position)//self.position.advancedBy(n: 1)
 
         switch firstChar {
         case "/":
@@ -53,7 +53,7 @@ public struct RoutingPatternScanner {
             stepPosition += 1
         }
 
-        self.position = self.position.advancedBy(stepPosition)
+        self.position = self.unScannedFragment.index(self.position, offsetBy: stepPosition)//self.position.advancedBy(n: stepPosition)
 
         switch firstChar {
         case ":":

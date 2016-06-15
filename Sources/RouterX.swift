@@ -19,7 +19,7 @@ public class Router {
 
     public func registerRoutingPattern(pattern: String, handler: MatchRouteHandler) -> Bool {
         let patternIdentifier = pattern.hashValue
-        if self.core.registerRoutingPattern(pattern, patternIdentifier: patternIdentifier) {
+        if self.core.registerRoutingPattern(pattern: pattern, patternIdentifier: patternIdentifier) {
             self.handlerMappings[patternIdentifier] = handler
 
             return true
@@ -29,7 +29,7 @@ public class Router {
     }
 
     public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
-        guard let matchedRoute = self.core.matchURL(url) else {
+        guard let matchedRoute = self.core.matchURL(url: url) else {
             if let handler = unmatchHandler {
                 handler(url, context: context)
             } else {
@@ -49,6 +49,6 @@ public class Router {
             return false
         }
 
-        return matchURLAndDoHandler(url, context: context, unmatchHandler: unmatchHandler)
+        return matchURLAndDoHandler(url: url, context: context, unmatchHandler: unmatchHandler)
     }
 }

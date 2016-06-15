@@ -20,10 +20,10 @@ public class RouterXCore {
     }
 
     public func registerRoutingPattern(pattern: String, patternIdentifier: PatternIdentifier) -> Bool {
-        let tokens = RoutingPatternScanner.tokenize(pattern)
+        let tokens = RoutingPatternScanner.tokenize(expression: pattern)
 
         do {
-            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: patternIdentifier)
+            try RoutingPatternParser.parseAndAppendTo(rootRoute: self.rootRoute, routingPatternTokens: tokens, patternIdentifier: patternIdentifier)
 
             return true
         } catch {
@@ -36,21 +36,21 @@ public class RouterXCore {
             return nil
         }
 
-        let tokens = URLPathScanner.tokenize(path)
+        let tokens = URLPathScanner.tokenize(path: path)
         if tokens.isEmpty {
             return nil
         }
 
         var parameters: [String: String] = [:]
 
-        var tokensGenerator = tokens.generate()
+        var tokensGenerator = tokens.makeIterator()
         var targetRoute: RouteVertex = rootRoute
         while let token = tokensGenerator.next() {
             if let determinativeRoute = targetRoute.nextRoutes[token.routeEdge] {
                 targetRoute = determinativeRoute
             } else if let epsilonRoute = targetRoute.epsilonRoute {
                 targetRoute = epsilonRoute.1
-                parameters[epsilonRoute.0] = String(token).stringByRemovingPercentEncoding ?? ""
+                parameters[epsilonRoute.0] = String(token).removingPercentEncoding
             } else {
                 return nil
             }
@@ -64,6 +64,6 @@ public class RouterXCore {
             return nil
         }
 
-        return matchURL(url)
+        return matchURL(url: url)
     }
 }

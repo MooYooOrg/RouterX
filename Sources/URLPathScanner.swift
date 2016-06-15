@@ -16,7 +16,7 @@ public struct URLPathScanner {
     }
 
     private var unScannedFragment: String {
-        return self.path.substringFromIndex(self.position)
+        return path.substring(from: position)
     }
 
     public mutating func nextToken() -> URLPathToken? {
@@ -26,7 +26,7 @@ public struct URLPathScanner {
 
         let firstChar = self.unScannedFragment.characters.first!
 
-        self.position = self.position.advancedBy(1)
+        self.position = self.unScannedFragment.index(after: self.position)//self.position.advancedBy(n: 1)
 
         switch firstChar {
         case "/":
@@ -48,7 +48,7 @@ public struct URLPathScanner {
             stepPosition += 1
         }
 
-        self.position = self.position.advancedBy(stepPosition)
+        self.position = self.unScannedFragment.index(self.position, offsetBy: stepPosition)//self.position.advancedBy(n: stepPosition)
 
         return .Literal("\(firstChar)\(fragment)")
     }

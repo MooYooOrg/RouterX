@@ -29,7 +29,7 @@ let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 //: Register patterns, the closure is the handle when matched the pattern.
 
 // Set a route pattern, the closure is a handler that would be performed after match the pattern
-router.registerRoutingPattern(pattern1) { (url, parameters, context) in
+router.registerRoutingPattern(pattern: pattern1) { (url, parameters, context) in
   // Do something here, e.g: show a UI
   var string = "URL is \(url), parameter is \(parameters)"
   if let context = context as? String {
@@ -38,7 +38,7 @@ router.registerRoutingPattern(pattern1) { (url, parameters, context) in
   print(string)
 }
 
-router.registerRoutingPattern(pattern2) { _ in
+router.registerRoutingPattern(pattern: pattern2) { _ in
   // Do something here, e.g: show a UI
   print("call new article")
 }
@@ -49,9 +49,9 @@ router.registerRoutingPattern(pattern2) { _ in
 let path1 = "/articles/page/2/sort/recent.json?foo=bar&baz"
 
 // It's will be matched, and perform the handler that we have set up.
-router.matchURLPathAndDoHandler(path1)
+router.matchURLPathAndDoHandler(urlPath: path1)
 // It can pass the context for handler
-router.matchURLPathAndDoHandler(path1, context: "fooo")
+router.matchURLPathAndDoHandler(urlPath: path1, context: "fooo")
 
 // A case that shouldn't be matched
 let path2 = "/articles/2/edit"
@@ -66,7 +66,7 @@ let customUnmatchHandler: UnmatchRouteHandler = { (url, context) in
   print(string)
 }
 // It's will not be matched, and perform the default unmatch handler that we have set up
-router.matchURLPathAndDoHandler(path2)
+router.matchURLPathAndDoHandler(urlPath: path2)
 
 // It can provide a custome unmatch handler to override the default, also can pass the context
-router.matchURLPathAndDoHandler(path2, context: "bar", unmatchHandler: customUnmatchHandler)
+router.matchURLPathAndDoHandler(urlPath: path2, context: "bar", unmatchHandler: customUnmatchHandler)

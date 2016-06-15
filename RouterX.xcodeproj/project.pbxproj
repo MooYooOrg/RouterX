@@ -378,7 +378,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = jasl;
 				TargetAttributes = {
 					C47B8A491C7B4EE000C2C164 = {
@@ -699,6 +699,7 @@
 				PRODUCT_NAME = RouterX;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -724,6 +725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jasl.RouterXTests;
 				PRODUCT_NAME = RouterXTests;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -762,6 +764,7 @@
 				PRODUCT_NAME = RouterX;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -789,6 +792,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jasl.RouterXTests;
 				PRODUCT_NAME = RouterXTests;
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -833,6 +837,7 @@
 				PRODUCT_NAME = RouterX;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -862,6 +867,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jasl.RouterXTests;
 				PRODUCT_NAME = RouterXTests;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

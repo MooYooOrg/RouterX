@@ -1,7 +1,7 @@
 import Foundation
 
-public typealias MatchRouteHandler = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
-public typealias UnmatchRouteHandler = ((NSURL, context: AnyObject?) -> ())
+public typealias MatchRouteHandler = ((URL, parameters: [String:String], context: AnyObject?) -> Void)
+public typealias UnmatchRouteHandler = ((URL, context: AnyObject?) -> ())
 
 public class Router {
     private let core: RouterXCore = RouterXCore()
@@ -28,7 +28,7 @@ public class Router {
         }
     }
 
-    public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
+    public func matchURLAndDoHandler(url: URL, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
         guard let matchedRoute = self.core.matchURL(url: url) else {
             if let handler = unmatchHandler {
                 handler(url, context: context)
@@ -45,7 +45,7 @@ public class Router {
     }
 
     public func matchURLPathAndDoHandler(urlPath: String, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
-        guard let url = NSURL(string: urlPath) else {
+        guard let url = URL(string: urlPath) else {
             return false
         }
 

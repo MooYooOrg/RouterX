@@ -1,11 +1,11 @@
 import Foundation
 
 public struct MatchedRoute {
-    public let url: NSURL
+    public let url: URL
     public let parametars: [String: String]
     public let patternIdentifier: PatternIdentifier
 
-    public init(url: NSURL, parameters: [String: String], patternIdentifier: PatternIdentifier) {
+    public init(url: URL, parameters: [String: String], patternIdentifier: PatternIdentifier) {
         self.url = url
         self.parametars = parameters
         self.patternIdentifier = patternIdentifier
@@ -31,7 +31,7 @@ public class RouterXCore {
         }
     }
 
-    public func matchURL(url: NSURL) -> MatchedRoute? {
+    public func matchURL(url: URL) -> MatchedRoute? {
         guard let path = url.path else {
             return nil
         }
@@ -60,7 +60,7 @@ public class RouterXCore {
     }
 
     public func matchURLPath(urlPath: String) -> MatchedRoute? {
-        guard let url = NSURL(string: urlPath) else {
+        guard let url = URL(string: urlPath) else {
             return nil
         }
 

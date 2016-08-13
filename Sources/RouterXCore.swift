@@ -53,8 +53,12 @@ open class RouterXCore {
                 return nil
             }
         }
-
-        return MatchedRoute(url: url, parameters: parameters, patternIdentifier: targetRoute.patternIdentifier!)
+        
+        if let patternIdentifier = targetRoute.patternIdentifier {
+            return MatchedRoute(url: url, parameters: parameters, patternIdentifier: patternIdentifier)
+        } else {
+            return nil
+        }
     }
 
     open func matchURLPath(_ urlPath: String) -> MatchedRoute? {
